@@ -1,6 +1,7 @@
 {% extends 'Home_Page/Base.html' %}
 
 {% block content %}
-<h3> <a href="{% url 'course_search' %}">Course Search</a> </h3>
-
+<h3>Hello, {{ user.username|default:'Guest' }}!</h3>
+<h3>Please select an option from the sidebar.</h3>
+<h3>JUSTIN I SWEAR MAKE THIS PAGE COOLER AND NOT A WASTE</h3>
 {% endblock %}

@@ -16,13 +16,27 @@
 
   {% if really %}
     <div class="row">
-        <ul>
+      <table class="course_search" style="width:80%">
+          <tr>
+            <th>Course Name</th>
+            <th>Course Number</th>
+            <th>Day(s)</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th></th>
+          </tr>
           {% for course in courses %}
-            <li><a href="/course/{{ course.pk }}/">{{course.name}}</a></li>
-          {% empty %}
-            <h4>Please enter a valid course name.</h4>
+            <tr>
+                <td>{{course.name}}</td>
+                <td>{{course.number}}</td>
+                <td>{{course.days}}</td>
+                <td>{{course.start_time}}</td>
+                <td>{{course.end_time}}</td>
+                <td><a href="/course/{{ course.pk }}/">
+                  <button type="button" class="more_details">More details</button></td></a>
+
           {% endfor %}
-        </ul>
-    </div>
+          </tr>
+      </table>
   {% endif %}
 {% endblock %}

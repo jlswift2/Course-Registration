@@ -1,10 +1,38 @@
 from django.shortcuts import render
-import json
-from .models import Course,Prof,Location
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
+from .models import Course,Prof
+
+
+def user_login(request):
+    if request.method == 'POST':
+        # Process the request if posted data are available
+        username = request.POST['username']
+        password = request.POST['password']
+        # Check username and password combination if correct
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            # Save session as cookie to login the user
+            login(request, user)
+            # Success, now let's login the user.
+            return render(request, 'Home_Page/Home_Page.html')
+        else:
+            # Incorrect credentials, let's throw an error to the screen.
+            return render(request, '', {'error_message': 'Incorrect username and / or password.'})
+    else:
+        # No post data availabe, let's just show the page to the user.
+        return render(request, 'registration/login.html')
 
 
 def home(request):
-    return render(request, 'Home_Page/Home_Page.html', {})
+    if request.user.is_authenticated:
+        return render(request, 'Home_Page/Home_Page.html', {})
+    else:
+        return render(request, 'registration/login.html', {})
+
+
+def account_dashboard(request):
+    return render(request, 'user_dashboard/user_dashboard.html', {})
 
 
 def course_desc(request, pk):
@@ -23,3 +51,10 @@ def course_search(request):
         data['courses'] = courses
     data['really'] = really
     return render(request, 'Course_Search/Course_Search.html', data)
+
+
+def prof_bio(request, pk):
+    prof = Prof.objects.get(pk=pk)
+    data = {'prof': prof}
+    print(data)
+    return render(request, 'prof_info/prof_bio.html', data)
