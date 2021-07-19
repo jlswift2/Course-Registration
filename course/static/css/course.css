@@ -55,3 +55,8 @@ main{
 .row {
     padding-top: 20px;
 }
+
+.insalad {
+    color: red;
+    padding-top: 10px;
+}
