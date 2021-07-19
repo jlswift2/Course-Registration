@@ -36,6 +36,4 @@ class Prof(models.Model):
 #     def __str__(self):
 #         return self.building + self.room_number
 
-#class User(AbstractUser):
- #   is_student = models.BooleanField()
-  #  is_teacher = models.BooleanField()
+
