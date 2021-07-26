@@ -3,6 +3,18 @@ from django.conf import settings
 from django.contrib.auth.models import User
 import datetime
 
+class Student(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    gradyear = models.IntegerField()
+
+
+
+class Professor(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    department = models.CharField(max_length=200)
+    bio = models.TextField()
+    office_location = models.CharField(max_length=200)
+
 # class staff:
 #     ;lkas
 #     lkasjd
