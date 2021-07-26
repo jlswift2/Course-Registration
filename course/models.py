@@ -1,17 +1,20 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.models import User
 import datetime
 
-# class Student(models.Model):
-#     firstname
-#     lastname
-#     gradyear
-#     user = authusermodelid
 
-# class professor:
-#     askdfj
+
+class Student(User):
+    gradyear = models.IntegerField()
+
+    def __str__(self):
+        return self.name
+
+# class Professor(ContactInfo):
+#     department = models.CharField(max_length=200)
 #     lkasjd
-#     bio
+#     bio = models.TextField()
 
 # class staff:
 #     ;lkas
