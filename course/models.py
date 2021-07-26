@@ -1,7 +1,23 @@
-from django.conf import settings
 from django.db import models
-from django.utils import timezone
-from django.contrib.auth.models import AbstractUser
+from django.conf import settings
+import datetime
+
+# class Student(models.Model):
+#     firstname
+#     lastname
+#     gradyear
+#     user = authusermodelid
+
+# class professor:
+#     askdfj
+#     lkasjd
+#     bio
+
+# class staff:
+#     ;lkas
+#     lkasjd
+#     lkasjdf
+#
 
 class Course(models.Model):
     name = models.CharField(max_length=200)
@@ -15,6 +31,7 @@ class Course(models.Model):
         'Prof', on_delete=models.CASCADE)
     location = models.CharField(max_length=200)
     description = models.TextField()
+    students = models.ManyToManyField(settings.AUTH_USER_MODEL, through='Enrollment')
 
     def __str__(self):
         return self.name
@@ -27,13 +44,11 @@ class Prof(models.Model):
     def __str__(self):
         return self.name
 
+class Enrollment(models.Model):
+    student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    date_enrolled = models.DateField(default=datetime.datetime.now())
+    final_grade = models.CharField(max_length=1, blank=True, null=True)
 
-# class Location(models.Model):
-#     building = models.CharField(max_length=200)
-#     address = models.TextField()
-#     room_number = models.CharField(max_length=200)
-#
-#     def __str__(self):
-#         return self.building + self.room_number
-
-
+    class Meta:
+        unique_together = [['student', 'course']]
