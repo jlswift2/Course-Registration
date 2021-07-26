@@ -4,5 +4,4 @@ from .models import Course, Prof, Enrollment, Student, Professor
 admin.site.register(Student)
 admin.site.register(Professor)
 admin.site.register(Course)
-admin.site.register(Prof)
 admin.site.register(Enrollment)
