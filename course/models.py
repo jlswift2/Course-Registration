@@ -3,18 +3,19 @@ from django.conf import settings
 from django.contrib.auth.models import User
 import datetime
 
-
-
 class Student(User):
     gradyear = models.IntegerField()
 
     def __str__(self):
-        return self.name
+        return User.first_name, User.last_name
 
-# class Professor(ContactInfo):
-#     department = models.CharField(max_length=200)
-#     lkasjd
-#     bio = models.TextField()
+class Professor(User):
+    department = models.CharField(max_length=200)
+    bio = models.TextField()
+    office_location = models.CharField(max_length=200)
+
+    def __str__(self):
+        return User.first_name, User.last_name
 
 # class staff:
 #     ;lkas
