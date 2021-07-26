@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import User
 import datetime
 
 class Student(models.Model):
@@ -8,12 +7,12 @@ class Student(models.Model):
     gradyear = models.IntegerField()
 
 
-
 class Professor(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     department = models.CharField(max_length=200)
     bio = models.TextField()
     office_location = models.CharField(max_length=200)
+
 
 # class staff:
 #     ;lkas
@@ -38,13 +37,6 @@ class Course(models.Model):
     def __str__(self):
         return self.name
 
-class Prof(models.Model):
-    name = models.CharField(max_length=200)
-    department = models.CharField(max_length=200)
-    office_location = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.name
 
 class Enrollment(models.Model):
     student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
