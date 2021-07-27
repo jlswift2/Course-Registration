@@ -13,7 +13,6 @@ class Professor(models.Model):
     bio = models.TextField()
     office_location = models.CharField(max_length=200)
 
-
 # class staff:
 #     ;lkas
 #     lkasjd
@@ -29,7 +28,7 @@ class Course(models.Model):
     start_date = models.DateField(auto_now=False)
     end_date = models.DateField(auto_now=False)
     prof = models.ForeignKey(
-        'Prof', on_delete=models.CASCADE)
+        'Professor', on_delete=models.SET_NULL, null=True)
     location = models.CharField(max_length=200)
     description = models.TextField()
     students = models.ManyToManyField(settings.AUTH_USER_MODEL, through='Enrollment')
