@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import Course, Prof
+from .models import Course, Student, Professor
 
 
 def user_login(request):
@@ -55,7 +55,7 @@ def course_search(request):
 
 @login_required
 def prof_bio(request, pk):
-    prof = Prof.objects.get(pk=pk)
+    prof = Professor.objects.get(pk=pk)
     data = {'prof': prof}
     print(data)
     return render(request, 'prof_info/prof_bio.html', data)
