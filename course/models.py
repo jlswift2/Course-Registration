@@ -6,12 +6,17 @@ class Student(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     gradyear = models.IntegerField()
 
+    def __str__(self):
+        return self.user.last_name + ', ' + self.user.first_name
 
 class Professor(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     department = models.CharField(max_length=200)
     bio = models.TextField()
     office_location = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.user.last_name + ', ' + self.user.first_name
 
 # class staff:
 #     ;lkas
