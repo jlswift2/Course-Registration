@@ -10,5 +10,16 @@
     <h5>{{course.start_time}}<h5>
     <h5>{{course.end_time}}<h5>
 
-    <h5>{{course.description}}<h5></h5>
+    <h5>{{course.description}}<h5>
+
+    <form method="POST" class="post-form">{% csrf_token %}
+        <button type="submit" class="save btn btn-default">Enroll Now</button>
+    </form>
+
+    <div class="unique">
+        {% if unique %}
+            <h6>*You are already enrolled in this course</h6>
+        {% endif %}
+    </div>
+
 {% endblock %}
