@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
+from django.db import IntegrityError
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import Course, Student, Professor
-
+from .forms import EnrollmentForm
+from .models import Course, Student, Professor, Enrollment
+import datetime
 
 def user_login(request):
     if request.method == 'POST':
@@ -39,8 +41,21 @@ def account_dashboard(request):
 def course_desc(request, pk):
     course = Course.objects.get(pk=pk)
     data = {'course': course}
-    print(data)
-    return render(request, 'Course_Search/Course_Desc.html', data)
+    if request.method == 'POST':
+        enroll = EnrollmentForm(request.POST or None)
+        if enroll.is_valid():
+            try:
+                enrollment = enroll.save(commit=False)
+                enrollment.student = request.user
+                enrollment.course = course
+                enrollment.date_enrolled = datetime.datetime.now()
+                enrollment.save()
+                return render(request, 'Course_Search/Course_Desc.html', data)
+            except IntegrityError:
+                data['unique'] = 'unique'
+            return render(request, 'Course_Search/Course_Desc.html', data)
+    else:
+        return render(request, 'Course_Search/Course_Desc.html', data)
 
 @login_required
 def course_search(request):
