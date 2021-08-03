@@ -20,11 +20,15 @@ class Professor(models.Model):
 
 
 class Department(models.Model):
+    department_name = models.CharField(max_length=200, default=" ")
     department_key = models.CharField(max_length=4)
+
+    def __str__(self):
+        return self.department_key
 
 class Course(models.Model):
     name = models.CharField(max_length=200)
-    department = models.CharField(max_length=200, null=True)
+    department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
     number = models.CharField(max_length=200)
     days = models.CharField(max_length=200)
     start_time = models.TimeField(auto_now=False)
