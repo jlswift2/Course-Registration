@@ -18,11 +18,9 @@ class Professor(models.Model):
     def __str__(self):
         return self.user.last_name + ', ' + self.user.first_name
 
-# class staff:
-#     ;lkas
-#     lkasjd
-#     lkasjdf
-#
+
+class Department(models.Model):
+    department_key = models.CharField(max_length=4)
 
 class Course(models.Model):
     name = models.CharField(max_length=200)
