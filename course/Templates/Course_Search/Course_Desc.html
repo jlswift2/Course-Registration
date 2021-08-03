@@ -1,16 +1,16 @@
 {% extends 'Home_Page/Base.html' %}
 
 {% block content %}
-    <h5>{{course.name}}<h5>
-    <h5>{{course.number}}<h5>
+    <h5>{{course.name}}</h5>
+    <h5>{{course.department}}{{course.number}}</h5>
     <h5>{{course.prof.pk}}</h5>
-    <h5><a href="/prof/{{ course.prof.pk }}/">{{course.prof}}</a><h5>
-    <h5>{{course.location}}<h5>
-    <h5>{{course.days}}<h5>
-    <h5>{{course.start_time}}<h5>
-    <h5>{{course.end_time}}<h5>
+    <h5><a href="/prof/{{ course.prof.pk }}/">{{course.prof}}</a></h5>
+    <h5>{{course.location}}</h5>
+    <h5>{{course.days}}</h5>
+    <h5>{{course.start_time}}</h5>
+    <h5>{{course.end_time}}</h5>
 
-    <h5>{{course.description}}<h5>
+    <h5>{{course.description}}</h5>
 
     <form method="POST" class="post-form">{% csrf_token %}
         <button type="submit" class="save btn btn-default">Enroll Now</button>
