@@ -1,0 +1,16 @@
+{% extends 'Home_Page/Base.html' %}
+
+{% block content %}
+  <div class="row">
+      <table class="course_browse" style="width:80%">
+          <tr>
+              <th>Course Department</th>
+          </tr>
+          {% for course in departments %}
+            <tr>
+                <td>{{course.department}}</td>
+          {% endfor %}
+            </tr>
+      </table>
+
+  {% endblock %}
