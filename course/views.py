@@ -69,6 +69,20 @@ def course_search(request):
     return render(request, 'Course_Search/Course_Search.html', data)
 
 @login_required
+def course_browse(request):
+    # data = {}
+    # courses = Course.objects.order_by('department').distinct('department')
+    # data['departments'] = courses
+    # return render(request, 'Course_Search/Course_Browse.html', data)
+    data = {}
+    courses = Course.objects.order_by('department')
+    for course in courses:
+        if course.department not in data[course]:
+            data[course] = courses
+    return render(request, 'Course_Search/Course_Browse.html', data)
+
+
+@login_required
 def prof_bio(request, pk):
     prof = Professor.objects.get(pk=pk)
     data = {'prof': prof}
