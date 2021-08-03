@@ -28,7 +28,7 @@
           {% for course in courses %}
             <tr>
                 <td>{{course.name}}</td>
-                <td>{{course.number}}</td>
+                <td>{{course.department+course.number}}</td>
                 <td>{{course.days}}</td>
                 <td>{{course.start_time}}</td>
                 <td>{{course.end_time}}</td>

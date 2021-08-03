@@ -26,6 +26,7 @@ class Professor(models.Model):
 
 class Course(models.Model):
     name = models.CharField(max_length=200)
+    department = models.CharField(max_length=200, null=True)
     number = models.CharField(max_length=200)
     days = models.CharField(max_length=200)
     start_time = models.TimeField(auto_now=False)
