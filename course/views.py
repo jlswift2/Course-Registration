@@ -3,7 +3,7 @@ from django.db import IntegrityError
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import EnrollmentForm
-from .models import Course, Student, Professor, Enrollment
+from .models import Course, Student, Professor, Enrollment, Department
 import datetime
 
 def user_login(request):
@@ -69,18 +69,20 @@ def course_search(request):
     return render(request, 'Course_Search/Course_Search.html', data)
 
 @login_required
-def course_browse(request):
-    # data = {}
-    # courses = Course.objects.order_by('department').distinct('department')
-    # data['departments'] = courses
-    # return render(request, 'Course_Search/Course_Browse.html', data)
+def course_browse_base(request):
     data = {}
-    courses = Course.objects.order_by('department')
-    for course in courses:
-        if course.department not in data[course]:
-            data[course] = courses
+    departments = Department.objects.all()
+    data['departments'] = departments
+
     return render(request, 'Course_Search/Course_Browse.html', data)
 
+
+def course_browse_department(request, department_key):
+    department = Department.objects.get(department_key=department_key)
+    courses = Course.objects.filter(department__department_key__icontains=department.department_key)
+    data = {'Courses': courses}
+    print(data)
+    return render(request, 'Course_Search/Course_Browse_Department.html', data)
 
 @login_required
 def prof_bio(request, pk):
