@@ -80,7 +80,7 @@ def course_browse_base(request):
 def course_browse_department(request, department_key):
     department = Department.objects.get(department_key=department_key)
     courses = Course.objects.filter(department__department_key__icontains=department.department_key)
-    data = {'Courses': courses}
+    data = {'courses': courses}
     print(data)
     return render(request, 'Course_Search/Course_Browse_Department.html', data)
 
