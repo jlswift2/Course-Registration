@@ -2,6 +2,27 @@
 
 {% block content %}
 
-poooooop
-
+<div class="row">
+  <table class="table table-bordered" style="width:50%">
+      <tr>
+        <th>Course Name</th>
+        <th>Course Number</th>
+        <th>Day(s)</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th></th>
+      </tr>
+      {% for course in courses %}
+        <tr>
+            <td>{{course.name}}</td>
+            <td>{{course.department}}{{course.number}}</td>
+            <td>{{course.days}}</td>
+            <td>{{course.start_time}}</td>
+            <td>{{course.end_time}}</td>
+            <td><a href="/course/{{ course.pk }}/">
+              <button type="button" class="more_details">More details</button></td></a>
+      {% endfor %}
+        </tr>
+  </table>
+</div>
 {% endblock %}
