@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.db import IntegrityError
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 from .forms import EnrollmentForm
 from .models import Course, Student, Professor, Enrollment, Department
 import datetime
@@ -36,6 +36,16 @@ def home(request):
 @login_required
 def account_dashboard(request):
     return render(request, 'user_dashboard/user_dashboard.html', {})
+
+@login_required
+def my_classes(request):
+    enrollments = Enrollment.objects.filter(student__username__iexact=request.user.username)
+    print(enrollments)
+    data = {'schedule': enrollments}
+
+    print(data)
+    return render(request, 'user_dashboard/user_schedule.html', data)
+
 
 @login_required
 def course_desc(request, pk):
@@ -73,10 +83,10 @@ def course_browse_base(request):
     data = {}
     departments = Department.objects.all()
     data['departments'] = departments
-
+    print(data)
     return render(request, 'Course_Search/Course_Browse.html', data)
 
-
+@login_required
 def course_browse_department(request, department_key):
     department = Department.objects.get(department_key=department_key)
     courses = Course.objects.filter(department__department_key__icontains=department.department_key)
