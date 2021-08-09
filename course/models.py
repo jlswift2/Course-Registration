@@ -53,3 +53,6 @@ class Enrollment(models.Model):
 
     class Meta:
         unique_together = [['student', 'course']]
+
+    def __str__(self):
+        return self.course.name
