@@ -1,6 +1,6 @@
 from django.urls import path
-from django.shortcuts import redirect
 from . import views
+
 
 urlpatterns = [
     path('login/', views.user_login, name='login'),
@@ -10,5 +10,6 @@ urlpatterns = [
     path('course/browse/<slug:department_key>', views.course_browse_department, name='course_department'),
     path('course/<int:pk>/', views.course_desc, name='course_desc'),
     path('prof/<int:pk>/', views.prof_bio, name='prof_bio'),
-    path('user/<slug:user.username>/', views.account_dashboard, name='account_dashboard')
+    path('user/dashboard/', views.account_dashboard, name='account_dashboard'),
+    path('user/schedule', views.my_classes, name='schedule'),
 ]
