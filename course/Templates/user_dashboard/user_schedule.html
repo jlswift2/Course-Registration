@@ -1,0 +1,9 @@
+{% extends 'Home_Page/Base.html' %}
+
+{% block content %}
+
+    {% for class in schedule %}
+        <br>{{class.course.name}}
+    {% endfor %}
+
+{% endblock %}
