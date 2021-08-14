@@ -18,10 +18,11 @@
       <form class="col-md-6 col-md-offset-5">
           <a href="{% url 'course_browse' %}">Course Browser</a>
       </form>
+  </div>
 
   {% if really %}
-    <div class="row">
-      <table class="course_search" style="width:50%">
+    <div class="row pt-5">
+      <table class="table table-bordered" style="width:50%">
           <tr>
             <th>Course Name</th>
             <th>Course Number</th>
@@ -38,7 +39,7 @@
                 <td>{{course.start_time}}</td>
                 <td>{{course.end_time}}</td>
                 <td><a href="/course/{{ course.pk }}/">
-                  <button type="button" class="more_details">More details</button></td></a>
+                    <button type="button" class="more_details">More details</button></a></td>
           {% endfor %}
             </tr>
       </table>
