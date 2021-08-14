@@ -40,7 +40,11 @@ def account_dashboard(request):
 @login_required
 def my_classes(request):
     enrollments = Enrollment.objects.filter(student__username__iexact=request.user.username)
-    data = {'schedule': enrollments}
+    data = {}
+    if enrollments:
+        data = {'schedule': enrollments}
+    else:
+        data['empty'] = 'empty'
     return render(request, 'user_dashboard/user_schedule.html', data)
 
 @login_required
