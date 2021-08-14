@@ -1,0 +1,15 @@
+{% extends 'Home_Page/Base.html' %}
+{% load static %}
+{% block content %}
+
+<p>Are you sure you want to cancel your enrollment in "{{course}}"?</p>
+
+<form action="{% url 'unenroll' course.id %}" method="POST">
+
+    {% csrf_token %}
+    <a href="{% url 'schedule' %}">Cancel</a>
+
+    <input type="submit" name="Confirm">
+</form>
+
+{% endblock %}
