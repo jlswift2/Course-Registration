@@ -40,11 +40,17 @@ def account_dashboard(request):
 @login_required
 def my_classes(request):
     enrollments = Enrollment.objects.filter(student__username__iexact=request.user.username)
-    print(enrollments)
     data = {'schedule': enrollments}
-
-    print(data)
     return render(request, 'user_dashboard/user_schedule.html', data)
+
+@login_required
+def unenroll(request, pk):
+    course = Enrollment.objects.get(id=pk)
+    data = {'course': course}
+    if request.method == 'POST':
+        course.delete()
+        return redirect('/')
+    return render(request, 'user_dashboard/delete.html', data)
 
 
 @login_required
