@@ -1,14 +1,17 @@
 {% extends 'Home_Page/Base.html' %}
 
 {% block content %}
-
+<div class="row pt-5">
+    {% if empty %}
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4"><a href="{% url 'course_browse' %}"> It seems you have no classes!</a></div>
+    {% endif %}
+</div>
     {% for class in schedule %}
         <tr>
             <td>{{class.course.name}}</td>
             <td><a class="btn btn-outline-danger btn-sm" href="{% url 'unenroll' class.id %}">Cancel Enrollment</a></td>
         </tr>
     {% endfor %}
-<!--                <form method="POST" class="post-form">{% csrf_token %}-->
-<!--                    <button type="submit" class="unenroll btn btn-outline-danger btn-sm">Cancel Enrollment</button>-->
-<!--                </form>-->
+
 {% endblock %}
