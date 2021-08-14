@@ -3,7 +3,12 @@
 {% block content %}
 
     {% for class in schedule %}
-        <br>{{class.course.name}}
+        <tr>
+            <td>{{class.course.name}}</td>
+            <td><a class="btn btn-outline-danger btn-sm" href="{% url 'unenroll' class.id %}">Cancel Enrollment</a></td>
+        </tr>
     {% endfor %}
-
+<!--                <form method="POST" class="post-form">{% csrf_token %}-->
+<!--                    <button type="submit" class="unenroll btn btn-outline-danger btn-sm">Cancel Enrollment</button>-->
+<!--                </form>-->
 {% endblock %}
